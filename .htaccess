@@ -1,0 +1,7 @@
+#404 Every page on a website
+RewriteEngine On
+RewriteRule ^ - [R=404,L]
+
+
+#singe redirect
+301 /oldpage /newpage
