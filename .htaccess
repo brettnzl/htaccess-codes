@@ -2,6 +2,23 @@
 RewriteEngine On
 RewriteRule ^ - [R=404,L]
 
-
 #singe redirect
 301 /oldpage /newpage
+
+#Full domain Redirect with wildcard
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^olddomain.co.nz$ [OR]
+  RewriteCond %{HTTP_HOST} ^www.olddomain.co.nz$
+  RewriteRule (.*)$ https://newdomain.co.nz/$1 [R=301,L]
+</IfModule>
+
+# Full www to non www Redirect
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www.domain.org [NC]
+RewriteRule ^(.*)$ https://domain.org/$1 [L,R=301]
+
+
+#full Redirect non-www to www
+RewriteCond %{HTTP_HOST} ^yourdomain.com [NC]
+RewriteRule ^(.*)$ http://www.yourdomain.com/$1 [L,R=301]
