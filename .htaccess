@@ -22,3 +22,11 @@ RewriteRule ^(.*)$ https://domain.org/$1 [L,R=301]
 #full Redirect non-www to www
 RewriteCond %{HTTP_HOST} ^yourdomain.com [NC]
 RewriteRule ^(.*)$ http://www.yourdomain.com/$1 [L,R=301]
+
+
+#Redirect all of the traffic to the temporary landing page
+<IfModule mod_rewrite.c>
+   RewriteEngine on
+   RewriteCond %{REQUEST_URI} !.*index\.php
+   RewriteRule (.*) /index.php [R=302,L]
+</IfModule>
